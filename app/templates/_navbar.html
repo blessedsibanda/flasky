@@ -15,10 +15,11 @@
                           <strong>{{current_user.username}}</strong>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url_for('main.user') }}">My Profile</a>
-                          <a class="dropdown-item" href="{{ url_for('auth.change_password') }}">Change Password</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Log Out</a>
+                            <a class="dropdown-item" href="{{ url_for('main.user') }}">My Profile</a>
+                            <a class="dropdown-item" href="{{ url_for('auth.change_password') }}">Change Password</a>
+                            <a class="dropdown-item" href="{{ url_for('auth.change_email_request') }}">Change Email</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Log Out</a>
                         </div>
                     </li>
 
