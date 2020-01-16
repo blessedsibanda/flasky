@@ -1,16 +1,20 @@
 import unittest
 import time
-from app import db  
+from app import db, create_app  
 from app.models import User, Permission, AnonymousUser, Role
 
 class UserModelTestCase(unittest.TestCase):
     def setUp(self):
+        self.app = create_app('testing')
+        self.app_context = self.app.app_context()
+        self.app_context.push()
         db.create_all()
         Role.insert_roles()
 
     def tearDown(self):
         db.session.remove()
         db.drop_all()
+        self.app_context.pop()
 
     def test_password_setter(self):
         u = User(password='cat')
@@ -99,6 +103,7 @@ class UserModelTestCase(unittest.TestCase):
         self.assertEqual(u1.email, 'john@example.com')
 
     def test_user_role(self):
+        Role.insert_roles()
         u = User(email='john@example.com', password='cat')
         self.assertTrue(u.can(Permission.FOLLOW))
         self.assertTrue(u.can(Permission.COMMENT))
@@ -107,6 +112,7 @@ class UserModelTestCase(unittest.TestCase):
         self.assertFalse(u.can(Permission.ADMIN))
 
     def test_anonymous_user(self):
+        Role.insert_roles()
         u = AnonymousUser()
         self.assertFalse(u.can(Permission.FOLLOW))
         self.assertFalse(u.can(Permission.COMMENT))
