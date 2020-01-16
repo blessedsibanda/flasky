@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block title %}- Edit Profile{% endblock title %}
+
+{% block body %}
+    <h1>Edit Your Profile</h1>
+    <hr>
+    {{render_form(form)}}
+    <br>
+    
+{% endblock body %}
