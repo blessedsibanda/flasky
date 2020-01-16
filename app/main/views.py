@@ -1,5 +1,6 @@
 from datetime import datetime
 from flask import render_template, session, redirect, url_for, current_app
+from flask_login import login_required
 from . import main
 from .forms import NameForm
 from .. import db    
@@ -26,6 +27,7 @@ def index():
         return redirect(url_for('.index'))
     return render_template('main/index.html', form=form, name=session.get('name'), current_time=datetime.utcnow(), known=session.get('known'))
 
-@main.route('/user/<name>')
-def user(name):
-    return render_template('main/user.html', name=name)
+@main.route('/user')
+@login_required
+def user():
+    return render_template('main/user.html')
