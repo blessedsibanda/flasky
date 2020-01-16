@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block title %}- Register{% endblock title %}
+
+{% block body %}
+    <h1>Register</h1>
+    <hr>
+    {{render_form(form)}}
+    
+{% endblock body %}
