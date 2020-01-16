@@ -4,6 +4,13 @@ from app import db
 from app.models import User
 
 class UserModelTestCase(unittest.TestCase):
+    def setUp(self):
+        db.create_all()
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
+
     def test_password_setter(self):
         u = User(password='cat')
         self.assertTrue(u.password_hash is not None)
@@ -64,8 +71,8 @@ class UserModelTestCase(unittest.TestCase):
         self.assertFalse(User.reset_password(token + 'a', 'dog'))
         self.assertTrue(u.verify_password('cat'))
 
-    def test_email_change_token(self):
-        u = User(email='foo@example.com')
+    def test_valid_email_change_token(self):
+        u = User(email='foo@example.com', password='cat')
         db.session.add(u)
         db.session.commit()
         token = u.generate_email_change_token('bar@example.com')
@@ -81,11 +88,11 @@ class UserModelTestCase(unittest.TestCase):
         self.assertNotEqual(u.email, 'bar@example.com')
         self.assertEqual(u.email, 'foo@example.com')
 
-    def test_duplicate_emai_change_token(self):
+    def test_duplicate_email_change_token(self):
         u1 = User(email='john@example.com')
         u2 = User(email='peter@example.com')
         db.session.add_all([u1, u2])
         db.session.commit()
-        token = u1.generate_email_change_token(u2.email)
+        token = u1.generate_email_change_token('peter@example.com')
         self.assertFalse(u1.change_email(token))
         self.assertEqual(u1.email, 'john@example.com')
