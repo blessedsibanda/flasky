@@ -24,8 +24,8 @@ def index():
         session['name'] = form.name.data
         form.name.data = ''
         return redirect(url_for('.index'))
-    return render_template('index.html', form=form, name=session.get('name'), current_time=datetime.utcnow(), known=session.get('known'))
+    return render_template('main/index.html', form=form, name=session.get('name'), current_time=datetime.utcnow(), known=session.get('known'))
 
 @main.route('/user/<name>')
 def user(name):
-    return render_template('user.html', name=name)
+    return render_template('main/user.html', name=name)
