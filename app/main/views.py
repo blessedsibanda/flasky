@@ -11,17 +11,17 @@ from ..decorators import admin_required, permission_required
 def index():
     return render_template('main/index.html', current_time=datetime.utcnow())
 
-@main.route('/user')
-@login_required
-def user():
-    return render_template('main/user.html')
+@main.route('/user/<username>')
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    return render_template('main/user.html', user=user)
 
 @main.route('/admin')
 @login_required
 @admin_required
 def for_admins_only():
-    return "For Administrators!"
-
+    return render_template('main/admin.html')
+    
 @main.route('/moderate')
 @login_required
 @permission_required(Permission.MODERATE)
