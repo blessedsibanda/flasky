@@ -2,32 +2,18 @@
 {% from 'bootstrap/form.html' import render_form %}
 
 {% block body %}
+    {% if current_user.is_authenticated %}
     <h3>Hello, {{ current_user.username }}!</h3>
+    {% endif %}
+    
     <div class="col-md-8">
         <div>
             {% if current_user.can(Permission.WRITE) %}
                 {{ render_form(form) }}
             {% endif %}
         </div>
-        <ul class="posts">
-            {% for post in posts %}
-                <li class="post d-flex">
-                    <div class="profile-thumbnail">
-                        <a href="{{ url_for('.user', username=post.author.username) }}">
-                            <img src="{{ post.author.gravatar(size=40) }}" class="img-rounded">
-                        </a>
-                    </div>
-                    <div class="flex-grow-1 ml-3">
-                        <div class="post-date">{{ moment(post.timestamp).fromNow() }}</div>
-                        <div class="post-author">
-                            <a href="{{ url_for('.user', username=post.author.username) }}">
-                                {{ post.author.username }}
-                            </a>
-                        </div>
-                        <div class="post-body">{{ post.body }}</div>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
+
+        {% include 'main/_posts.html' %}
+
     </div>
 {% endblock body %}
