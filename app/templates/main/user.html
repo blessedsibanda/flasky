@@ -1,20 +1,27 @@
 {% extends 'base.html' %}
 
 {% block body %}    
-    <h1>{{ user.username }}</h1>
-    {% if user.name or user.location %}
-        <p>
-            {% if user.name %}
-                {{ user.name }}
+    <div class="mb-3 d-sm-flex">
+        <div class="mr-3">
+            <img src="{{ user.gravatar() }}" class="img-rounded">
+        </div>
+        <div>
+            <h1>{{ user.username }}</h1>
+            {% if user.name or user.location %}
+            <p>
+                {% if user.name %}
+                    {{ user.name }}
+                {% endif %}
+                {% if user.location %}
+                    From <a href="http://maps.google.com/?q={{user.location}}" target="blank">{{ user.location }}</a>
+                {% endif %}
+            </p>
             {% endif %}
-            {% if user.location %}
-                From <a href="http://maps.google.com/?q={{user.location}}">{{ user.location }}</a>
+            {% if current_user.is_administrator() %}
+                <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
             {% endif %}
-        </p>
-    {% endif %}
-    {% if current_user.is_administrator() %}
-        <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
-    {% endif %}
+        </div>
+    </div>
     {% if user.about_me %}
         <p>{{ user.about_me }}</p>
     {% endif %}
