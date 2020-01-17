@@ -21,3 +21,11 @@ export FLASKY_ADMIN=*your-admin-email*
 ### run database migrations
 
 flask db upgrade
+
+### run the unit tests
+
+flask test
+
+### run the app
+
+flask run
