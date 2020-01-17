@@ -1,5 +1,5 @@
-# my-flask-starter
-A Flask Starter Boilerplate
+# Flasky
+A Social Blogging Application with Python/Flask
 
 
 ### Create venv
@@ -18,9 +18,6 @@ export MAIL_PASSWORD=*your-gmail-password*
 
 export FLASKY_ADMIN=*your-admin-email*
 
-### Create and run database migrations
-flask db init 
-
-flask db migrate -m'initial migration'
+### run database migrations
 
 flask db upgrade
