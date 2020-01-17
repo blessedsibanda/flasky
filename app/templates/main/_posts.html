@@ -22,9 +22,16 @@
                 {{ post.body }}
             {% endif %}
         </div>
+        <div class="post-footer">
+            <a href="{{ url_for('.post', id=post.id) }}">
+                <span class="badge badge-secondary">Permalink</span>
+            </a>
+        </div>
     </div>
 </li>
 {% endfor %}
 </ul>
 <br>
-{{ render_pagination(pagination) }}
+{% if pagination %}
+    {{ render_pagination(pagination) }}
+{% endif %}

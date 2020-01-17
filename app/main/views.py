@@ -31,6 +31,11 @@ def user(username):
     posts = pagination.items
     return render_template('main/user.html', user=user, posts=posts, pagination=pagination)
 
+@main.route('/post/<int:id>')
+def post(id):
+    post = Post.query.get_or_404(id)
+    return render_template('main/post.html', posts=[post], pagination=None)
+
 @main.route('/admin')
 @login_required
 @admin_required
