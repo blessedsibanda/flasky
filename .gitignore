@@ -4,3 +4,9 @@ venv/
 __pycache__/
 *.sqlite
 *.db
+.idea/.gitignore
+.idea/flasky.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/inspectionProfiles/profiles_settings.xml
