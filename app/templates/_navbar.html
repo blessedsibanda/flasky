@@ -8,7 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="navbar-nav mr-auto">
                 {{render_nav_item('main.index', 'Home')}}
-                {{render_nav_item('main.user', 'Profile', username=current_user.username)}}
+
+                {% if current_user.is_authenticated %}
+                    {{ render_nav_item('main.user', 'Profile', username=current_user.username)}}
+                {% endif %}
 
                 {% if current_user.can(Permission.ADMIN) %}
                     {{render_nav_item('main.for_admins_only', 'Admin')}}
