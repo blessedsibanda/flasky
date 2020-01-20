@@ -21,6 +21,23 @@
                 {% if current_user.is_administrator() %}
                     <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
                 {% endif %}
+                <hr>
+                {% if current_user.can(Permission.FOLLOW) and user != current_user %}
+                    {% if not current_user.is_following(user) %}
+                        <a href="{{ url_for('.follow', username=user.username) }}" class="btn btn-primary">Follow</a>
+                    {% else %}
+                        <a href="{{ url_for('.unfollow', username=user.username) }}" class="btn btn-secondary">UnFollow</a>
+                    {% endif %}
+                {% endif %}
+                <a href="{{ url_for('.followers', username=user.username) }}">
+                    Followers: <span class="badge badge-primary">{{ user.followers.count() }}</span>
+                </a>
+                <a href="{{ url_for('.followed_by', username=user.username) }}">
+                    Following: <span class="badge badge-primary">{{ user.followed.count() }}</span>
+                </a>
+                {% if current_user.is_authenticated and user != current_user and user.is_following(current_user) %}
+                    | <span class="badge badge-secondary">Follows you</span>
+                {% endif %}
             </div>
         </div>
         {% if user.about_me %}
