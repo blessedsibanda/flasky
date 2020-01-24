@@ -1,7 +1,17 @@
 {% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+
 
 {% block body %}
     <div class="col-md-8">
         {% include 'main/_posts.html' %}
+
+        <div class="mb-3">
+            {% if current_user.can(Permission.COMMENT) %}
+                {{ render_form(form) }}
+            {% endif %}
+        </div>
+
+        {% include 'main/_comments.html' %}
     </div>
 {% endblock body %}
