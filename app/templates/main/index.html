@@ -13,6 +13,17 @@
             {% endif %}
         </div>
 
+        <ul class="nav nav-tabs mt-3">
+            <li class="nav-item">
+                <a href="{{ url_for('.show_all') }}" class="nav-link {% if not show_followed %}active{% endif %}">All</a>
+            </li>
+            {% if current_user.is_authenticated %}
+            <li class="nav-item">
+                <a href="{{ url_for('.show_followed') }}" class="nav-link {% if show_followed %}active{% endif %}">Following</a>
+            </li>
+            {% endif %}
+        </ul>
+
         {% include 'main/_posts.html' %}
         
     </div>
