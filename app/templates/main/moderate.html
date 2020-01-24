@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    - Comment Moderation
+{% endblock title %}    
+
+{% block body %}
+    <h3>Comment Moderation</h3>
+    
+    <div class="col-md-8">
+        {% set moderate = True %}
+        {% include 'main/_comments.html' %}
+    </div>
+{% endblock body %}
