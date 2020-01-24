@@ -37,6 +37,12 @@ Werkzeug = "==0.16.0"
 flask-httpauth = "*"
 coverage = "*"
 selenium = "*"
+flask-socketio = "*"
+flask-marshmallow = "*"
+flask-uploads = "*"
+flask-jwt-extended = "*"
+httpie = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
